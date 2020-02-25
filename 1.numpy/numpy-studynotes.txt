@@ -1,0 +1,1085 @@
+学习笔记
+Numpy主要用于对多维数组执行计算。提供大量的库函数和操作。广泛用于以下任务：
+
+机器学习：编写机器学习算法时，需要对矩阵进行各种数值计算。例如：矩阵乘法、换位、加法等。Numpy数组用于存储训练数据和机器学习模型的参数
+图像处理和计算机图形学：图像表示为多维数字数组。Numpy提供了一些库函数来快速处理图像
+数学任务：执行数学任务，比如：数值积分、微分、内插、外推
+创建数组
+
+使用Numpy提供的数组，成为ndarrays，可以执行矢量、矩阵、线性代数
+
+数组属性
+type(a)　　变量类型
+
+a.dtype　　数据类型
+
+a.size　　   大小
+
+a.shape　　维度
+
+a.itemsize　每个项占用的字节数
+
+a.ndim　　  数组维数
+
+a.nbytes      数组中所有数据消耗掉的字节数
+
+输入和输出
+#NumPy二进制文件（NPY, NPZ）
+load(file[, mmap_mode, allow_pickle, …]) 从.npy，.npz或pickle文件加载数组或pickle对象。
+save(file, arr[, allow_pickle, fix_imports]) 将数组保存为NumPy .npy格式的二进制文件。
+savez(file, args, *kwds) 将多个数组以未压缩的.npz格式保存到单个文件中。
+savez_compressed(file, args, *kwds) 将多个数组以压缩的.npz格式保存到单个文件中。
+这些二进制文件类型的格式记录在http://docs.scipy.org/doc/numpy/neps/npy-format.html
+
+#文本文件
+loadtxt(fname[, dtype, comments, delimiter, …]) 从文本文件加载数据。
+savetxt(fname, X[, fmt, delimiter, newline, …]) 从文本文件加载数据。
+genfromtxt(fname[, dtype, comments, …]) 从文本文件加载数据，并按指定处理缺失值。
+fromregex(file, regexp, dtype[, encoding]) 使用来自文本文件构造数组
+#正则表达式解析。
+fromstring(string[, dtype, count, sep]) 从字符串中的文本数据初始化的新1-D数组。
+ndarray.tofile(fid[, sep, format]) 将数组作为文本或二进制写入文件（默认）。
+ndarray.tolist() 将数组作为（可能是嵌套的）列表返回。
+#原始二进制文件
+fromfile(file[, dtype, count, sep]) 根据文本或二进制文件中的数据构造数组。
+ndarray.tofile(fid[, sep, format]) 将数组作为文本或二进制写入文件（默认）。
+#字符串格式
+array2string(a[, max_line_width, precision, …]) 返回数组的字符串表示形式。
+array_repr(arr[, max_line_width, precision, …]) 返回数组的字符串表示形式。
+array_str(a[, max_line_width, precision, …]) 返回数组中数据的字符串表示形式。
+format_float_positional(x[, precision, …]) 在位置表示法中将浮点标量格式化为十进制字符串。
+format_float_scientific(x[, precision, …]) 使用科学计数法将浮点标量格式化为十进制字符串。
+#内存映射文件
+memmap 为存储在磁盘上的二进制文件中的数组创建内存映射。
+#文本格式选项
+set_printoptions([precision, threshold, …]) 设置打印选项。
+get_printoptions() 返回当前的打印选项。
+set_string_function(f[, repr]) 设置一个Python函数，以便在相当打印数组时使用。
+#Base-n 相关
+binary_repr(num[, width]) 将输入数字的二进制表示形式返回为字符串。
+base_repr(number[, base, padding]) 返回给定基本系统中数字的字符串表示形式。
+#数据源
+DataSource([destpath]) 通用数据源文件（文件，http，ftp，...）
+创建数组
+另见：
+
+Array creation
+
+#Ones 和 zeros 方法
+empty(shape[, dtype, order]) 返回给定形状和类型的新数组，而不初始化条目。
+empty_like(a[, dtype, order, subok]) 返回一个与给定数组具有相同形状和类型的新数组。
+eye(N[, M, k, dtype, order]) 返回一个二维数组，其中对角线为1，零点为零。
+identity(n[, dtype]) 返回标识数组。
+ones(shape[, dtype, order]) 返回一个给定形状和类型的新数组，用一个填充。
+ones_like(a[, dtype, order, subok]) 返回与给定数组具有相同形状和类型的数组。
+zeros(shape[, dtype, order]) 返回给定形状和类型的新数组，用零填充。
+zeros_like(a[, dtype, order, subok]) 返回与给定数组具有相同形状和类型的零数组。
+full(shape, fill_value[, dtype, order]) 返回给定形状和类型的新数组，填充fill_value。
+full_like(a, fill_value[, dtype, order, subok]) 返回与给定数组具有相同形状和类型的完整数组。
+#利用现有数据
+array(object[, dtype, copy, order, subok, ndmin]) 创建一个新的数组。
+asarray(a[, dtype, order]) 将输入的参数转换为数组。
+asanyarray(a[, dtype, order]) 将输入转换为ndarray，但通过ndarray子类传递。
+ascontiguousarray(a[, dtype]) 在内存中返回连续数组(C顺序)。
+asmatrix(data[, dtype]) 将输入转换为矩阵。
+copy(a[, order]) 返回给定对象的数组副本。
+frombuffer(buffer[, dtype, count, offset]) 将缓冲区转换为一维数组。
+fromfile(file[, dtype, count, sep]) 从文本或二进制文件中的数据构造数组。
+fromfunction(function, shape, **kwargs) 通过在每个坐标上执行函数来构造数组。
+fromiter(iterable, dtype[, count]) 从可迭代对象创建一个新的一维数组。
+fromstring(string[, dtype, count, sep]) 从字符串中的文本数据初始化的新的一维数组.
+loadtxt(fname[, dtype, comments, delimiter, …]) 从文本文件加载数据。
+Creating record arrays (numpy.rec)
+注意
+numpy.rec 是numpy.core.records的首选别名。
+
+core.records.array(obj[, dtype, shape, …]) 从各种各样的对象构造一个记录数组。
+core.records.fromarrays(arrayList[, dtype, …]) 从数组的(平面)列表创建记录数组
+core.records.fromrecords(recList[, dtype, …]) 从文本形式的记录列表中创建一个重新数组
+core.records.fromstring(datastring[, dtype, …]) 从字符串中包含的二进制数据创建(只读)记录数组。
+core.records.fromfile(fd[, dtype, shape, …]) 从二进制文件数据创建数组
+#创建字符数组(numpy.charr)
+注意
+numpy.char 是 numpy.core.defchararra 的首选别名。
+
+core.defchararray.array(obj[, itemsize, …]) 创建一个字符数组。
+core.defchararray.asarray(obj[, itemsize, …]) 将输入转换为字符数组，只在必要时复制数据。
+#数值范围
+arange([start,] stop[, step,][, dtype]) 在给定的间隔内返回均匀间隔的值。
+linspace(start, stop[, num, endpoint, …]) 在指定的间隔内返回均匀间隔的数字。
+logspace(start, stop[, num, endpoint, base, …]) 返回数在对数刻度上均匀分布。
+geomspace(start, stop[, num, endpoint, dtype]) 返回数在对数尺度上均匀分布(几何级数)。
+meshgrid(xi, *kwargs) 从坐标向量返回坐标矩阵。
+mgrid nd_grid 实例，它返回一个密集的多维“meshgrid”。
+ogrid nd_grid 实例，它返回一个开放的多维“meshgrid”。
+#构建矩阵
+diag(v[, k]) 提取对角线或构造对角线阵列。
+diagflat(v[, k]) 使用展平输入创建二维数组作为对角线。
+tri(N[, M, k, dtype]) 一个数组，其中包含给定对角线和低于给定对角线的数字，其他地方为零
+tril(m[, k]) 数组的下三角形。
+triu(m[, k]) 数组的上三角形。
+vander(x[, N, increasing]) 生成Vandermonde矩阵。
+#矩阵类
+mat(data[, dtype]) 将输入解释为矩阵。
+bmat(obj[, ldict, gdict]) 从字符串、嵌套序列或数组生成矩阵对象
+数组操作
+#基本操作
+copyto(dst, src[, casting, where]) 将值从一个数组复制到另一个数组，并根据需要进行广播。
+#改变数组形状
+reshape(a, newshape[, order]) 为数组提供新形状而不更改其数据。
+ravel(a[, order]) 返回一个连续的扁平数组。
+ndarray.flat 数组上的一维迭代器.
+ndarray.flatten([order]) 返回折叠成一维的数组的副本。
+ss
+
+#转置式运算
+moveaxis(a, source, destination) 将数组的轴移动到新位置。
+
+rollaxis(a, axis[, start]) 向后滚动指定的轴，直到它位于给定位置。
+swapaxes(a, axis1, axis2) 交换数组的两个轴。
+ndarray.T 与self.transpose() 相同，只是如果self.ndim < 2 则返回self。
+transpose(a[, axes]) 置换数组的维度。
+#更改尺寸数量
+atleast_1d(*arys) 将输入转换为至少具有一个维度的数组。
+atleast_2d(*arys) 将输入视为具有至少两个维度的数组。
+atleast_3d(*arys) 将输入视为具有至少三维的数组。
+broadcast 制作一个模仿广播的对象。
+broadcast_to(array, shape[, subok]) 将数组广播到新形状。
+broadcast_arrays(args, *kwargs) 相互广播任意数量的数组。
+expand_dims(a, axis) 展开数组的形状。
+squeeze(a[, axis]) 展开数组的形状。
+#改变阵列的种类
+asarray(a[, dtype, order]) 将输入转换为数组。
+asanyarray(a[, dtype, order]) 将输入转换为ndarray，但通过ndarray子类。
+asmatrix(data[, dtype]) 将输入解释为矩阵。
+asfarray(a[, dtype]) 返回转换为float类型的数组。
+asfortranarray(a[, dtype]) 返回在内存中以Fortran顺序布局的数组。
+ascontiguousarray(a[, dtype]) 在内存中返回一个连续的数组（C顺序）。
+asarray_chkfinite(a[, dtype, order]) 将输入转换为数组，检查NaN或Infs。
+asscalar(a) 将大小为1的数组转换为标量等效数组。
+require(a[, dtype, requirements]) 返回满足要求的提供类型的ndarray。
+#加入数组
+concatenate((a1, a2, …)[, axis, out]) 沿现有轴加入一系列数组。
+stack(arrays[, axis, out]) 沿新轴加入一系列数组。
+column_stack(tup) 将1-D阵列作为列堆叠成2-D阵列。
+dstack(tup) 按顺序深度堆叠阵列（沿第三轴）。
+hstack(tup) 按顺序堆叠数组（列式）。
+vstack(tup) 垂直堆叠数组（行方式）。
+block(arrays) 从嵌套的块列表中组装nd数组。
+#拆分数组
+split(ary, indices_or_sections[, axis]) 将数组拆分为多个子数组。
+array_split(ary, indices_or_sections[, axis]) 将数组拆分为多个子数组。
+dsplit(ary, indices_or_sections) 沿第3轴（深度）将数组拆分为多个子数组。
+hsplit(ary, indices_or_sections) 将数组水平拆分为多个子数组（按列）。
+vsplit(ary, indices_or_sections) 将数组垂直拆分为多个子数组（逐行）。
+#平铺阵列
+tile(A, reps) 通过重复A重复给出的次数来构造数组。
+repeat(a, repeats[, axis]) 重复数组的元素。
+#Adding and removing elements
+delete(arr, obj[, axis]) 返回一个新数组，其子轴数组沿轴被删除。
+insert(arr, obj, values[, axis]) 在给定索引之前沿给定轴插入值。
+append(arr, values[, axis]) 将值附加到数组的末尾。
+resize(a, new_shape) 返回具有指定形状的新数组。
+trim_zeros(filt[, trim]) 从1-D数组或序列中修剪前导和/或尾随零。
+unique(ar[, return_index, return_inverse, …]) 找到数组的唯一元素。
+#重新排列元素
+flip(m, axis) 沿给定轴反转数组中元素的顺序。
+fliplr(m) 向左/向右翻转阵列。
+flipud(m) 向上/向下翻转阵列。
+reshape(a, newshape[, order]) 为数组提供新形状而不更改其数据。
+roll(a, shift[, axis]) 沿给定轴滚动数组元素。
+rot90(m[, k, axes]) 在轴指定的平面中将数组旋转90度
+字符串操作
+此模块为numpy.string_或numpy.unicode_类型的数组提供一组矢量化字符串操作。所有这些都基于Python标准库中的字符串方法。
+
+#String operations
+add(x1, x2) 返回两个str或unicode数组的逐元素字符串连接。
+multiply(a, i) 返回(a * i)， 即字符串多个连接，逐个元素。
+mod(a, values) 返回（a％i），即Python之前的2.6字符串格式化（插值），对于str或unicode等一对数组的元素。
+capitalize(a) 返回a的副本，其中只有每个元素的第一个字符大写。
+center(a, width[, fillchar]) 返回a的副本，其元素以长度为一的字符串为中心。
+decode(a[, encoding, errors]) 逐元素方式调用str.decode。
+encode(a[, encoding, errors]) 逐元素方式调用str.encode。
+join(sep, seq) 返回一个字符串，它是序列seq中字符串的串联。
+ljust(a, width[, fillchar]) 返回一个数组，其中包含左对齐的元素，长度为宽度的字符串。
+lower(a) 返回一个数组，其元素转换为小写。
+lstrip(a[, chars]) 对于a中的每个元素，返回删除了前导字符的副本。
+partition(a, sep) 将每个元素分成一个周围的sep。
+replace(a, old, new[, count]) 对于a中的每个元素，返回一个字符串的副本，其中所有出现的substring old都替换为new。
+rjust(a, width[, fillchar]) 返回一个数组，其中右对齐元素的长度为宽度。
+rpartition(a, sep) 对最右边的分隔符周围的每个元素进行分区（拆分）。
+rsplit(a[, sep, maxsplit]) 对于a中的每个元素，使用sep作为分隔符字符串，返回字符串中单词的列表。
+rstrip(a[, chars]) 对于a中的每个元素，返回一个删除了尾随字符的副本。
+split(a[, sep, maxsplit]) 对于a中的每个元素，使用sep作为分隔符字符串，返回字符串中单词的列表。
+splitlines(a[, keepends]) 对于a中的每个元素，返回元素中的行列表，在行边界处断开。
+strip(a[, chars]) 对于a中的每个元素，返回一个删除了前导和尾随字符的副本。
+swapcase(a) 返回元素的字符串副本，大写字符转换为小写，反之亦然。
+title(a) 返回元素字符串的字符串或unicode的版本。
+translate(a, table[, deletechars]) 对于a中的每个元素，返回字符串的副本，其中删除可选参数deletechars中出现的所有字符，并通过给定的转换表映射其余字符。
+upper(a) 返回一个数组，其元素转换为大写。
+zfill(a, width) 返回左边用零填充的数字字符串
+#对照
+与标准的numpy比较运算符不同，char模块中的那些运算符在执行比较之前剥离尾随空白字符。
+
+equal(x1, x2) 返回 (x1 == x2) 逐元素。
+not_equal(x1, x2) 返回 (x1 != x2) 逐元素。
+greater_equal(x1, x2) 返回 (x1 >= x2) 逐元素。
+less_equal(x1, x2) 返回 (x1 <= x2) 逐元素。
+greater(x1, x2) 返回 (x1 > x2) 逐元素。
+less(x1, x2) 返回 (x1 < x2) 逐元素。
+#字符串信息
+count(a, sub[, start, end]) 返回一个数组，其中包含[start, end]范围内substring sub的非重叠出现次数。
+find(a, sub[, start, end]) 对于每个元素，返回找到substring sub的字符串中的最低索引。
+index(a, sub[, start, end]) 与find一样，但在找不到子字符串时会引发ValueError。
+isalpha(a) 如果字符串中的所有字符都是字母并且至少有一个字符，则返回每个元素的true，否则返回false。
+isdecimal(a) 对于每个元素，如果元素中只有十进制字符，则返回True。
+isdigit(a) 如果字符串中的所有字符都是数字并且至少有一个字符，则返回每个元素的true，否则返回false。
+islower(a) 如果字符串中的所有外壳字符都是小写且至少有一个外壳字符，则为每个元素返回true，否则返回false。
+isnumeric(a) 对于每个元素，如果元素中只有数字字符，则返回True。
+isspace(a) 如果字符串中只有空格字符并且至少有一个字符，则为每个元素返回true，否则返回false。
+istitle(a) 如果元素是一个带有标题的字符串并且至少有一个字符，则为每个元素返回true，否则返回false。
+isupper(a) 如果字符串中的所有外壳字符都是大写且至少有一个字符，则为每个元素返回true，否则返回false。
+rfind(a, sub[, start, end]) 对于a中的每个元素，返回找到substring sub的字符串中的最高索引，使得sub包含在[start, end]中。
+rindex(a, sub[, start, end]) 和rfind一样，但是当找不到substring sub时会引发ValueError。
+startswith(a, prefix[, start, end]) 返回一个布尔数组，该数组为True，其中a中的字符串元素以prefix开头，否则为False。
+#便捷的类
+chararray(shape[, itemsize, unicode, …]) 提供有关字符串和unicode值数组的便捷视图
+时间日期操作
+datetime_as_string(arr[, unit, timezone, …]) 将日期时间数组转换为字符串数组。
+datetime_data(dtype, /) 获取有关日期或时间类型的步长的信息。
+#营业日功能
+busdaycalendar([weekmask, holidays]) 工作日日历对象，可有效存储定义busday系列函数的有效天数的信息。
+is_busday(dates[, weekmask, holidays, …]) 计算哪个给定日期是有效日期，哪些日期不是。
+busday_offset(dates, offsets[, roll, …]) 首先根据滚动规则将日期调整为有效日期，然后将偏移应用于有效日期内计算的给定日期。
+busday_count(begindates, enddates[, …]) 计算beginupdates和结束日期之间的有效天数，不包括enddates的日期。
+数据类型操作
+can_cast(from_, to[, casting]) 如果根据强制转换规则在数据类型之间进行转换，则返回True。
+promote_types(type1, type2) 返回具有最小大小和最小标量种类的数据类型，可以安全地转换type1和type2。
+min_scalar_type(a) 对于标量a，返回具有最小大小和最小标量类型的数据类型，该类型可以保存其值。
+result_type(*arrays_and_dtypes) 返回将NumPy类型提升规则应用于参数所产生的类型。
+common_type(*arrays) 返回输入数组所共有的标量类型。
+obj2sctype(rep[, default]) 返回对象的标量dtype或与Python类型等效的NumPy。
+#创建数据类型
+dtype(obj[, align, copy]) 创建数据类型对象。
+format_parser(formats, names, titles[, …]) 类将格式、名称、标题说明转换为dtype。
+#数据类型信息
+finfo(dtype) 浮点类型的机器限制。
+iinfo(type) 整数类型的机器限制。
+MachAr([float_conv, int_conv, …]) 诊断机器参数。
+#数据类型测试
+issctype(rep) 确定给定对象是否表示标量数据类型。
+issubdtype(arg1, arg2) 如果第一个参数是类型层次结构中的类型码较低/相等的类型，则返回True。
+issubsctype(arg1, arg2) 确定第一个参数是否是第二个参数的子类。
+issubclass_(arg1, arg2) 确定一个类是否是第二类的子类。
+find_common_type(array_types, scalar_types) 根据标准强制规则确定常见类型。
+#杂项
+typename(char) 返回给定数据类型代码的描述。
+sctype2char(sctype) 返回标量dtype的字符串表示形式。
+mintypecode(typechars[, typeset, default]) 返回给定类型可以安全转换到的最小大小类型的字符
+线性代数
+#矩阵和矢量产品
+dot(a, b[, out]) 两个数组的点积。
+linalg.multi_dot(arrays) 在单个函数调用中计算两个或多个数组的点积，同时自动选择最快的求值顺序。
+vdot(a, b) 返回两个向量的点积。
+inner(a, b) 两个数组的内积。
+outer(a, b[, out]) 计算两个向量的外积。
+matmul(a, b[, out]) 两个数组的矩阵乘积。
+tensordot(a, b[, axes]) 对于数组> = 1-D，沿指定轴计算张量点积。
+einsum(subscripts, *operands[, out, dtype, …]) 评估操作数上的爱因斯坦求和约定。
+einsum_path(subscripts, *operands[, optimize]) 通过考虑中间数组的创建，评估einsum表达式的最低成本收缩顺序。
+linalg.matrix_power(M, n) 将方阵提高到（整数）幂n。
+kron(a, b) 两个阵列的Kronecker产品。
+#分解
+linalg.cholesky(a) Cholesky分解。
+linalg.qr(a[, mode]) 计算矩阵的qr分解。
+linalg.svd(a[, full_matrices, compute_uv]) 奇异值分解。
+#矩阵特征值
+linalg.eig(a) 计算正方形阵列的特征值和右特征向量。
+linalg.eigh(a[, UPLO]) 返回Hermitian或对称矩阵的特征值和特征向量。
+linalg.eigvals(a) 计算一般矩阵的特征值。
+linalg.eigvalsh(a[, UPLO]) 计算Hermitian或实对称矩阵的特征值。
+#规范和其他数字
+linalg.norm(x[, ord, axis, keepdims]) 矩阵或矢量规范。
+linalg.cond(x[, p]) 计算矩阵的条件数。
+linalg.det(a) 计算数组的行列式。
+linalg.matrix_rank(M[, tol, hermitian]) 使用SVD方法返回阵列的矩阵等级
+linalg.slogdet(a) Compute the sign and (natural) 数组行列式的对数。
+trace(a[, offset, axis1, axis2, dtype, out]) 返回数组对角线的总和。
+#求解方程和反转矩阵
+linalg.solve(a, b) 求解线性矩阵方程或线性标量方程组。
+linalg.tensorsolve(a, b[, axes]) 求解x的张量方程ax = b。
+linalg.lstsq(a, b[, rcond]) 将最小二乘解返回到线性矩阵方程。
+linalg.inv(a) 计算矩阵的（乘法）逆。
+linalg.pinv(a[, rcond]) 计算矩阵的（Moore-Penrose）伪逆。
+linalg.tensorinv(a[, ind]) 计算N维数组的“逆”。
+金融API
+#简单的财务功能
+fv(rate, nper, pmt, pv[, when]) 计算未来价值。
+pv(rate, nper, pmt[, fv, when]) 计算现值。
+npv(rate, values) 返回现金流序列的NPV（净现值）。
+pmt(rate, nper, pv[, fv, when]) 计算贷款本金和利息的付款。
+ppmt(rate, per, nper, pv[, fv, when]) 计算贷款本金的付款。
+ipmt(rate, per, nper, pv[, fv, when]) 计算付款的利息部分。
+irr(values) 返回内部收益率（IRR）。
+mirr(values, finance_rate, reinvest_rate) 修改内部收益率。
+nper(rate, pmt, pv[, fv, when]) 计算定期付款的数量。
+rate(nper, pmt, pv, fv[, when, guess, tol, …]) 计算每个期间的利率。
+索引相关API
+另见：
+
+Indexing
+
+#生成索引数组
+c_ 将切片对象转换为沿第二轴的连接。
+r_ 将切片对象转换为沿第一轴的连接。
+s_ 为数组构建索引元组的更好方法。
+nonzero(a) 返回非零元素的索引。
+where(condition, [x, y]) 返回元素，可以是x或y，具体取决于条件。
+indices(dimensions[, dtype]) 返回表示网格索引的数组。
+ix_(*args) 从多个序列构造一个开放网格。
+ogrid nd_grid实例，它返回一个开放的多维“meshgrid”。
+ravel_multi_index(multi_index, dims[, mode, …]) 将索引数组的元组转换为平面索引数组，将边界模式应用于多索引。
+unravel_index(indices, dims[, order]) 将平面索引或平面索引数组转换为坐标数组的元组。
+diag_indices(n[, ndim]) 返回索引以访问数组的主对角线。
+diag_indices_from(arr) 返回索引以访问n维数组的主对角线。
+mask_indices(n, mask_func[, k]) 给定掩蔽函数，将索引返回到访问（n，n）数组。
+tril_indices(n[, k, m]) 返回（n，m）数组的下三角形的索引。
+tril_indices_from(arr[, k]) 返回arr的下三角形的索引。
+triu_indices(n[, k, m]) 返回（n，m）数组的上三角形的索引。
+triu_indices_from(arr[, k]) 返回arr上三角的索引。
+#类似索引的操作
+take(a, indices[, axis, out, mode]) 从轴上获取数组中的元素。
+choose(a, choices[, out, mode]) 从索引数组和一组数组构造一个数组以供选择。
+compress(condition, a[, axis, out]) 沿给定轴返回数组的选定切片。
+diag(v[, k]) 提取对角线或构造对角线阵列。
+diagonal(a[, offset, axis1, axis2]) 返回指定的对角线。
+select(condlist, choicelist[, default]) 返回从选择列表中的元素绘制的数组，具体取决于条件。
+lib.stride_tricks.as_strided(x[, shape, …]) 使用给定的形状和步幅创建数组视图。
+#将数据插入数组
+place(arr, mask, vals) 根据条件和输入值更改数组的元素。
+put(a, ind, v[, mode]) 用给定值替换数组的指定元素。
+putmask(a, mask, values) 根据条件和输入值更改数组的元素。
+fill_diagonal(a, val[, wrap]) 填充任何维度的给定数组的主对角线。
+#迭代数组
+nditer 用于迭代数组的高效多维迭代器对象。
+ndenumerate(arr) 多维索引迭代器。
+ndindex(*shape) 用于索引数组的N维迭代器对象。
+flatiter 平面迭代器对象迭代数组。
+lib.Arrayterator(var[, buf_size]) 用于大型数组的缓冲迭代器。
+ 
+
+排序、搜索和计数
+#排序
+sort(a[, axis, kind, order]) 返回数组的排序副本。
+lexsort(keys[, axis]) 使用一系列键执行间接排序。
+argsort(a[, axis, kind, order]) 返回对数组进行排序的索引。
+ndarray.sort([axis, kind, order]) 就地对数组进行排序。
+msort(a) 返回沿第一个轴排序的数组副本。
+sort_complex(a) 首先使用实部对复杂数组进行排序，然后使用虚部进行排序。
+partition(a, kth[, axis, kind, order]) 返回数组的分区副本。
+argpartition(a, kth[, axis, kind, order]) 使用kind关键字指定的算法沿给定轴执行间接分区。
+#搜索
+argmax(a[, axis, out]) 返回沿轴的最大值的索引。
+nanargmax(a[, axis]) 返回指定轴上最大值的索引，忽略NAS。
+argmin(a[, axis, out]) 返回沿轴的最小值的索引。
+nanargmin(a[, axis]) 返回指定轴上的最小值的索引，忽略NAS。
+argwhere(a) 查找按元素分组的非零数组元素的索引。
+nonzero(a) 返回非零元素的索引。
+flatnonzero(a) 返回a的展平版本中非零的索引。
+where(condition, [x, y]) 返回元素，可以是x或y，具体取决于条件。
+searchsorted(a, v[, side, sorter]) 查找应插入元素以维护顺序的索引。
+extract(condition, arr) 返回满足某些条件的数组元素。
+#计数
+count_nonzero(a[, axis]) 计算数组a中的非零值的数量。
+查找API
+#造真集
+unique(ar[, return_index, return_inverse, …]) 查找数组的唯一元素。
+#布尔运算
+in1d(ar1, ar2[, assume_unique, invert]) 测试一维数组的每个元素是否也存在于第二个数组中.
+intersect1d(ar1, ar2[, assume_unique]) 找到两个数组的交集。
+isin(element, test_elements[, …]) 计算test_Element中的元素，只在元素上广播。
+setdiff1d(ar1, ar2[, assume_unique]) 找出两个数组的集合差。
+setxor1d(ar1, ar2[, assume_unique]) 找到两个数组的集合。
+union1d(ar1, ar2) 找到两个数组的并集。
+自动域数学函数
+注意
+numpy.emath是numpy.lib.scimath的首选别名，可在导入numpy后使用。
+
+包装器用于更加用户友好地调用某些数学函数，这些函数的输出数据类型与输入的某些域中的输入数据类型不同。
+
+例如，对于带有分支切割的log这样的函数，此模块中的版本在复杂平面中提供数学上有效的答案：
+
+>>> import math
+>>> from numpy.lib import scimath
+>>> scimath.log(-math.exp(1)) == (1+1j*math.pi)
+True
+类似地，正确处理sqrt和其他基本对数power和trig函数。有关具体示例，请参阅各自的文档。
+
+浮点错误处理
+#设置和获取错误处理
+seterr([all, divide, over, under, invalid]) 设置如何处理浮点错误。
+geterr() 获取当前处理浮点错误的方法。
+seterrcall(func) 设置浮点错误回调函数或日志对象。
+geterrcall() 返回用于浮点错误的当前回调函数。
+errstate(**kwargs) 用于浮点错误处理的上下文管理器。
+#内部功能
+seterrobj(errobj) 设置定义浮点错误处理的对象。
+geterrobj() 返回定义浮点错误处理的当前对象。
+离散傅里叶变换
+#标准的 FFTs
+fft(a[, n, axis, norm]) 计算一维离散傅立叶变换。
+ifft(a[, n, axis, norm]) 计算一维离散傅立叶逆变换。
+fft2(a[, s, axes, norm]) 计算二维离散傅立叶变换
+ifft2(a[, s, axes, norm]) 计算二维逆离散傅立叶变换。
+fftn(a[, s, axes, norm]) 计算二维逆离散傅立叶变换。
+ifftn(a[, s, axes, norm]) 计算N维逆离散傅立叶变换。
+#真实的 FFTs
+rfft(a[, n, axis, norm]) 计算一维离散傅立叶变换用于实际输入。
+irfft(a[, n, axis, norm]) 计算实际输入的n点DFT的倒数。
+rfft2(a[, s, axes, norm]) 计算实阵列的二维FFT.
+irfft2(a[, s, axes, norm]) 计算实数组的二维逆FFT。
+rfftn(a[, s, axes, norm]) 计算实输入的N维离散傅立叶变换.
+irfftn(a[, s, axes, norm]) 求实输入的N维FFT的逆运算.
+#埃尔米特快速傅里叶变换
+hfft(a[, n, axis, norm]) 计算具有厄米对称性的信号的FFT，即实际频谱。
+ihfft(a[, n, axis, norm]) 计算具有Hermitian对称性的信号的反FFT。
+#辅助相关api
+fftfreq(n[, d]) 返回离散傅里叶变换采样频率。
+rfftfreq(n[, d]) 返回离散傅立叶变换采样频率(用于rfft、irfft)。
+fftshift(x[, axes]) 将零频率分量移到频谱的中心。
+ifftshift(x[, axes]) 反移的反义词。
+#背景资料
+傅立叶分析基本上是一种将函数表示为周期性分量之和以及从这些分量中恢复函数的方法。当函数及其傅里叶变换都被离散化的对应物替换时，它被称为离散傅里叶变换（DFT）。DFT已经成为数值计算的支柱，部分原因在于它的计算速度非常快，称为快速傅里叶变换（FFT），高斯（1805）已知并且由Cooley以其当前形式揭示。 Tukey [CT309]。按等人。[NR309]提供了傅里叶分析及其应用的可访问介绍。
+
+由于离散傅里叶变换将其输入分离为在离散频率下贡献的分量，因此它在数字信号处理中具有大量应用，例如用于滤波，并且在这种情况下，变换的离散化输入通常被称为信号。 ，存在于时域中。输出称为频谱或变换，存在于频域中。
+
+#实施细节
+定义DFT的方法有很多种，如指数变化、归一化等。在这个实现中，DFT被定义为
+
+公式
+
+DFT一般定义为复输入和复输出，线性频率f上的单频分量用复指数 公式 表示，其中Δt是采样间隔。
+
+结果中的值遵循所谓的“标准”顺序：如果A=fft(a, n)，则A[0]包含零频率项(信号的和)，对于实际输入，该项总是纯实的。然后A[1:n/2]包含正频率项，A[n/2+1:]包含负频率项，按负频率递减的顺序排列。对于偶数个输入点，A[n/2]表示正负奈奎斯特频率，对于实际输入也是纯实的。对于奇数个输入点，A[(n-1)/2]的正频率最大，A[(n+1)/2]的负频率最大。方法 np.fft.fftfreq(N) 返回一个数组，给出输出中相应元素的频率。常规的np.fft.fftShift(A)变换和它们的频率将零频率分量放在中间，np.fft.ifftShift(A)取消这一移位。
+
+当输入a为时域信号且A=FFT(A)时，np.abs(A)为其幅度谱，np.abs(A)*2为其功率谱。相位谱由 np.angle(A)得到。
+
+逆DFT定义为
+
+公式
+
+与正向变换不同的是，它的符号是指数型参数，默认的归一化是1/n。
+
+#正常化
+默认规范化具有未缩放的直接变换，并且逆变换按 1/n 缩放。 通过将关键字参数norm设置为"ortho"（默认为None）可以获得单一变换，这样直接变换和逆变换都将被公式缩放。
+
+#实变换和厄米特变换
+当输入是纯实的时，它的变换是厄米变换，即fk频率上的分量是频率fk上分量的复共轭，这意味着对于实际输入，负频率分量中没有正频率分量不能提供的信息。rfft函数族被设计为对实际输入进行运算，并通过只计算正频率分量(直到并包括Nyquist频率)来利用这种对称性。因此，n个输入点产生n/2+1个复输出点。这个族的逆假设它的输入具有相同的对称性，并且对于n个点的输出使用n/2+1个输入点。
+
+相应地，当光谱是纯实的时，信号是厄密的。hfft函数族利用了这种对称性，在输入(时间)域中使用n/2+1个复点作为频域上的n个实点。
+
+在更高的维度上，使用FFT，例如用于图像分析和滤波。FFT的计算效率意味着它也可以是计算大卷积的一种更快的方法，它利用了时域卷积等效于频域逐点乘法的特性。
+
+#更高的维度
+在二维中，DFT定义为
+
+公式
+
+它以明显的方式延伸到更高的尺寸，而更高尺寸的倒置也以相同的方式延伸。
+
+功能的编写
+apply_along_axis(func1d, axis, arr, *args, …) 将函数应用于沿给定轴的1-D切片。
+apply_over_axes(func, a, axes) 在多个轴上重复应用功能。
+vectorize(pyfunc[, otypes, doc, excluded, …]) 广义函数类。
+frompyfunc(func, nin, nout) 采用任意Python函数并返回NumPy ufunc。
+piecewise(x, condlist, funclist, args, *kw) 评估分段定义的函数。
+逻辑函数
+#真值测试
+all(a[, axis, out, keepdims]) 测试沿给定轴的所有数组元素是否都计算为True。
+any(a[, axis, out, keepdims]) 测试给定轴上的任何数组元素是否为True。
+#数组内容
+isfinite(x, /[, out, where, casting, order, …]) 测试元素的有限性（不是无穷大或不是数字）。
+isinf(x, /[, out, where, casting, order, …]) 对正或负无穷大进行元素级别测试。
+isnan(x, /[, out, where, casting, order, …]) 元素级别的为NaN测试并将结果作为布尔数组返回。
+isnat(x, /[, out, where, casting, order, …]) 元素级别为NaT（不是时间）测试并将结果作为布尔数组返回。
+isneginf(x[, out]) 元素级别测试负无穷大的元素，返回结果为bool数组。
+isposinf(x[, out]) 元素级别测试元素为正无穷大，返回结果为bool数组。
+#数组类型测试
+iscomplex(x) 返回一个bool数组，如果输入元素很复杂，则返回True。
+iscomplexobj(x) 检查复杂类型或复数数组。
+isfortran(a) 如果数组是Fortran连续但不是C连续，则返回True。
+isreal(x) 返回一个bool数组，如果输入元素是实数，则返回True。
+isrealobj(x) 如果x是非复数类型或复数数组，则返回True。
+isscalar(num) 如果num的类型是标量类型，则返回True。
+#逻辑运算
+logical_and(x1, x2, /[, out, where, …]) 逐个元素计算x1和x2的真值。
+logical_or(x1, x2, /[, out, where, casting, …]) 逐个元素计算x1 OR x2的真值。
+logical_not(x, /[, out, where, casting, …]) 逐个元素计算NOT x元素的真值。
+logical_xor(x1, x2, /[, out, where, …]) 逐个元素计算x1 XOR x2的真值。
+#比较
+allclose(a, b[, rtol, atol, equal_nan]) 如果两个数组在容差范围内在元素方面相等，则返回True。
+isclose(a, b[, rtol, atol, equal_nan]) 返回一个布尔数组，其中两个数组在容差范围内是元素相等的。
+array_equal(a1, a2) 如果两个数组具有相同的形状和元素，则为真，否则为False。
+array_equiv(a1, a2) 如果输入数组的形状一致且所有元素相等，则返回True。
+greater(x1, x2, /[, out, where, casting, …]) 逐个元素方式返回（x1> x2）的真值。
+greater_equal(x1, x2, /[, out, where, …]) 逐个元素方式返回（x1> = x2）的真值。
+less(x1, x2, /[, out, where, casting, …]) 逐个元素方式返回（x1<x2）的真值。< li="">
+less_equal(x1, x2, /[, out, where, casting, …]) 逐个元素方式返回（x1 =<x2）的真值。< li="">
+equal(x1, x2, /[, out, where, casting, …]) 逐个元素返回（x1 == x2）。
+not_equal(x1, x2, /[, out, where, casting, …]) 逐个元素返回 Return (x1 != x2)。
+掩码数组操作
+#常量
+ma.MaskType numpy.bool_ 的别名
+#创造
+#根据现有数据
+ma.masked_array numpy.ma.core.MaskedArray 的别名
+ma.array(data[, dtype, copy, order, mask, …]) 可能带有掩码值的数组类。
+ma.copy(self, args, *params) a.copy(order=) 返回数组的拷贝。
+ma.frombuffer(buffer[, dtype, count, offset]) 将缓冲区解释为一维数组。
+ma.fromfunction(function, shape, **kwargs) 通过在每个坐标上执行函数来构造数组。
+ma.MaskedArray.copy([order]) 返回数组的副本。
+#Ones 和 zeros 方法
+ma.empty(shape[, dtype, order]) 返回给定形状和类型的新数组，而不初始化条目。
+ma.empty_like(a[, dtype, order, subok]) 返回一个与给定数组具有相同形状和类型的新数组。
+ma.masked_all(shape[, dtype]) 带所有元素的空掩码数组。
+ma.masked_all_like(arr) 空掩码数组，具有现有数组的属性。
+ma.ones(shape[, dtype, order]) 返回一个给定形状和类型的新数组，其中填充了这些数组。
+ma.zeros(shape[, dtype, order]) 返回一个给定形状和类型的新数组，其中填充了零。
+#检察数组
+ma.all(self[, axis, out, keepdims]) 如果所有元素都计算为True，则返回True。
+ma.any(self[, axis, out, keepdims]) 如果求值的任何元素为True，则返回True。
+ma.count(self[, axis, keepdims]) 沿给定轴计算数组的非掩码元素。
+ma.count_masked(arr[, axis]) 计算沿给定轴的遮罩元素数。
+ma.getmask(a) 返回掩码数组或nomask的掩码。
+ma.getmaskarray(arr) 返回掩码数组的掩码，或False的完整布尔数组。
+ma.getdata(a[, subok]) 将掩码数组的数据作为ndarray返回。
+ma.nonzero(self) 返回非零的未屏蔽元素的索引。
+ma.shape(obj) 返回数组的形状。
+ma.size(obj[, axis]) 返回给定轴上的元素数。
+ma.is_masked(x) 确定输入是否具有掩码值。
+ma.is_mask(m) 如果m是有效的标准掩码，则返回True。
+ma.MaskedArray.data 返回当前数据，作为原始基础数据的视图。
+ma.MaskedArray.mask Mask
+ma.MaskedArray.recordmask 返回记录的掩码。
+ma.MaskedArray.all([axis, out, keepdims]) 如果所有元素都计算为True，则返回True。
+ma.MaskedArray.any([axis, out, keepdims]) 果求值的任何元素为True，则返回True。
+ma.MaskedArray.count([axis, keepdims]) 沿给定轴计算数组的非掩码元素。
+ma.MaskedArray.nonzero() 返回非零的未屏蔽元素的索引。
+ma.shape(obj) 返回数组的形状。
+ma.size(obj[, axis]) 返回给定轴上的元素数。
+#操作掩码数组
+#改变形状
+ma.ravel(self[, order]) 以视图的形式返回Self的一维版本。
+ma.reshape(a, new_shape[, order]) 返回一个数组，该数组包含具有新形状的相同数据。
+ma.resize(x, new_shape) 返回具有指定大小和形状的新掩码数组。
+ma.MaskedArray.flatten([order]) 返回折叠成一维的数组的副本。
+ma.MaskedArray.ravel([order]) 以视图的形式返回Self的一维版本。
+ma.MaskedArray.reshape(s, *kwargs) 给数组一个新的形状，而不改变它的数据。
+ma.MaskedArray.resize(newshape[, refcheck, …])
+#修改轴
+ma.swapaxes(self, *args, …) 返回axis1和axis2互换后的数组视图。
+ma.transpose(a[, axes]) 排列数组的大小。
+ma.MaskedArray.swapaxes(axis1, axis2) 返回axis1和axis2互换后的数组视图。
+ma.MaskedArray.transpose(*axes) 返回已移置轴的数组视图。
+#改变维数
+ma.atleast_1d(*arys) 将输入转换为至少具有一维的数组。
+ma.atleast_2d(*arys) 将输入视为至少具有两个维度的数组。
+ma.atleast_3d(*arys) 将输入视为至少具有三个维度的数组。
+ma.expand_dims(x, axis) 展开数组的形状。
+ma.squeeze(a[, axis]) 从数组的形状中移除一维项。
+ma.MaskedArray.squeeze([axis]) 对象的形状中移除一维项。
+ma.column_stack(tup) 将一维数组作为列堆栈到二维数组中.
+ma.concatenate(arrays[, axis]) 沿着给定的轴连接数组序列。
+ma.dstack(tup) 按序列深度排列数组(沿第三轴)。
+ma.hstack(tup) 以水平顺序(列方式)将数组堆叠。
+ma.hsplit(ary, indices_or_sections) 横向(按列)将数组拆分为多个子数组。
+ma.mr_ 沿第一轴将切片对象转换为串联。
+ma.row_stack(tup) 按顺序垂直(行)排列数组。
+ma.vstack(tup) 按顺序垂直(行)排列数组。
+Joining arrays
+ma.column_stack(tup) 将一维数组作为列堆栈到二维数组中.
+ma.concatenate(arrays[, axis]) 沿着给定的轴连接数组序列。
+ma.append(a, b[, axis]) 将值追加到数组的末尾。
+ma.dstack(tup) 按序列深度排列数组(沿第三轴)。
+ma.hstack(tup) 以水平顺序(列方式)将数组堆叠。
+ma.vstack(tup) 按顺序垂直(行)排列数组。
+#掩码操作
+#创建掩码
+ma.make_mask(m[, copy, shrink, dtype]) 从数组创建布尔掩码。
+ma.make_mask_none(newshape[, dtype]) 返回给定形状的布尔掩码，填充False。
+ma.mask_or(m1, m2[, copy, shrink]) 使用logical_or运算符组合两个掩码。
+ma.make_mask_descr(ndtype) 从给定的dtype构造一个dtype描述列表。
+#访问掩码
+ma.getmask(a) 返回蒙版数组或nomask的掩码。
+ma.getmaskarray(arr) 返回掩码数组的掩码，或False的完整布尔数组。
+ma.masked_array.mask Mask
+#查找掩码数据
+ma.flatnotmasked_contiguous(a) 沿给定轴在掩码数组中查找连续的未屏蔽数据。
+ma.flatnotmasked_edges(a) 查找第一个和最后一个未屏蔽值的索引。
+ma.notmasked_contiguous(a[, axis]) 沿给定轴在掩码数组中查找连续的未屏蔽数据。
+ma.notmasked_edges(a[, axis]) 查找沿轴的第一个和最后一个未屏蔽值的索引。
+ma.clump_masked(a) 返回与1-D数组的掩码块对应的切片列表。
+ma.clump_unmasked(a) 返回与1-D阵列的未掩蔽块相对应的切片列表。
+#修改掩码
+ma.mask_cols(a[, axis]) 屏蔽包含屏蔽值的2D数组的列。
+ma.mask_or(m1, m2[, copy, shrink]) 使用logical_or运算符组合两个掩码。
+ma.mask_rowcols(a[, axis]) 屏蔽包含屏蔽值的2D数组的行和/或列。
+ma.mask_rows(a[, axis]) 屏蔽包含屏蔽值的2D数组的行。
+ma.harden_mask(self) 硬化掩码。
+ma.soften_mask(self) 软化掩码。
+ma.MaskedArray.harden_mask() 硬化掩码。
+ma.MaskedArray.soften_mask() 软化掩码。
+ma.MaskedArray.shrink_mask() 尽可能将掩码减少到nomask。
+ma.MaskedArray.unshare_mask() 复制掩码并将sharedmask标志设置为False。
+#转换操作
+#> 转化为掩码数组
+ma.asarray(a[, dtype, order]) 将输入转换为给定数据类型的掩码数组。
+ma.asanyarray(a[, dtype]) 将输入转换为掩码数组，保留子类。
+ma.fix_invalid(a[, mask, copy, fill_value]) 返回带有无效数据的输入，并用填充值替换。
+ma.masked_equal(x, value[, copy]) 掩盖一个等于给定值的数组。
+ma.masked_greater(x, value[, copy]) 掩盖大于给定值的数组。
+ma.masked_greater_equal(x, value[, copy]) 掩盖大于或等于给定值的数组。
+ma.masked_inside(x, v1, v2[, copy]) 在给定间隔内掩盖数组。
+ma.masked_invalid(a[, copy]) 掩盖出现无效值的数组（NaN或infs）。
+ma.masked_less(x, value[, copy]) 掩盖小于给定值的数组。
+ma.masked_less_equal(x, value[, copy]) 掩盖小于或等于给定值的数组。
+ma.masked_not_equal(x, value[, copy]) 掩盖不等于给定值的数组。
+ma.masked_object(x, value[, copy, shrink]) 掩盖数据正好等于值的数组x。
+ma.masked_outside(x, v1, v2[, copy]) 在给定间隔之外屏蔽数组。
+ma.masked_values(x, value[, rtol, atol, …]) 掩盖浮点数相等的数组。
+ma.masked_where(condition, a[, copy]) 掩盖满足条件的数组。
+#> 转化为一个numpy数组
+ma.compress_cols(a) 取消包含掩码值的二维数组的整列。
+ma.compress_rowcols(x[, axis]) 取消二维数组中包含掩码值的行和/或列。
+ma.compress_rows(a) 取消包含掩码值的二维数组的整行数据。
+ma.compressed(x) 以一维数组的形式返回所有非掩码数据。
+ma.filled(a[, fill_value]) 以数组的形式返回输入，用填充值替换掩码数据。
+ma.MaskedArray.compressed() 以一维数组的形式返回所有非掩码数据。
+ma.MaskedArray.filled([fill_value]) 返回Self的副本，并使用给定的值填充掩码值。
+#> 转化为其他对象
+ma.MaskedArray.tofile(fid[, sep, format]) 将掩码数组保存到二进制格式的文件中。
+ma.MaskedArray.tolist([fill_value]) 以层次化Python列表的形式返回掩码数组的数据部分。
+ma.MaskedArray.torecords() 将掩码数组转换为灵活类型的数组。
+ma.MaskedArray.tobytes([fill_value, order]) 将数组数据作为包含数组中原始字节的字符串返回。
+#腌制和反腌制
+ma.dump(a, F) 腌制一个掩码数组并写入文件
+ma.dumps(a) 返回与掩码数组的腌制相对应的字符串。
+ma.load(F) cPickle.load的包装器，它接受类似文件的对象或文件名。
+ma.loads(strg) 从当前字符串加载腌制后的数组。
+#填充掩码数组
+ma.common_fill_value(a, b) 返回两个掩码数组的公共填充值(如果有的话)。
+ma.default_fill_value(obj) 返回参数对象的默认填充值。
+ma.maximum_fill_value(obj) 返回可以由对象的dtype表示的最小值。
+ma.maximum_fill_value(obj) 返回可以由对象的dtype表示的最小值。
+ma.set_fill_value(a, fill_value) 如果a是一个掩码数组，则设置a的填充值。
+ma.MaskedArray.get_fill_value() 返回掩码数组的填充值。
+ma.MaskedArray.set_fill_value([value]) 设置掩码数组的填充值。
+ma.MaskedArray.fill_value Filling value.
+#掩码数组算法
+#算法
+ma.anom(self[, axis, dtype]) 沿着给定的轴计算异常(与算术平均值的偏差)。
+ma.anomalies(self[, axis, dtype]) 沿着给定的轴计算异常(与算术平均值的偏差)。
+ma.average(a[, axis, weights, returned]) 返回给定轴上数组的加权平均值。
+ma.conjugate(x, /[, out, where, casting, …]) 返回复共轭元素。
+ma.corrcoef(x[, y, rowvar, bias, …]) 返回皮尔逊乘积-矩相关系数。
+ma.cov(x[, y, rowvar, bias, allow_masked, ddof]) 估计协方差矩阵。
+ma.cumsum(self[, axis, dtype, out]) 返回给定轴上数组元素的累积和。
+ma.cumprod(self[, axis, dtype, out]) 返回给定轴上数组元素的累积乘积。
+ma.mean(self[, axis, dtype, out, keepdims]) 返回沿给定轴排列的数组元素的平均值。
+ma.median(a[, axis, out, overwrite_input, …]) 沿指定轴计算中值。
+ma.power(a, b[, third]) 返回从第二个数组提升到幂的按元素划分的基数组。
+ma.prod(self[, axis, dtype, out, keepdims]) 返回给定轴上数组元素的乘积。
+ma.std(self[, axis, dtype, out, ddof, keepdims]) 返回数组元素沿给定轴的标准差。
+ma.sum(self[, axis, dtype, out, keepdims]) 返回给定轴上数组元素的和。
+ma.var(self[, axis, dtype, out, ddof, keepdims]) 计算沿指定轴的方差。
+ma.MaskedArray.anom([axis, dtype]) 沿着给定的轴计算异常(与算术平均值的偏差)。
+ma.MaskedArray.cumprod([axis, dtype, out]) 返回给定轴上数组元素的累积乘积。
+ma.MaskedArray.cumsum([axis, dtype, out]) 返回给定轴上数组元素的累积和。
+ma.MaskedArray.mean([axis, dtype, out, keepdims]) 返回沿给定轴排列的数组元素的平均值。
+ma.MaskedArray.prod([axis, dtype, out, keepdims]) 返回给定轴上数组元素的乘积。
+ma.MaskedArray.std([axis, dtype, out, ddof, …]) 返回数组元素沿给定轴的标准差。
+ma.MaskedArray.sum([axis, dtype, out, keepdims]) 返回给定轴上数组元素的和。
+ma.MaskedArray.var([axis, dtype, out, ddof, …]) 计算沿指定轴的方差。
+#最小/最大
+ma.argmax(self[, axis, fill_value, out]) 返回沿给定轴的最大值的索引数组。
+ma.argmin(self[, axis, fill_value, out]) 沿着给定的轴将索引数组返回到最小值。
+ma.max(obj[, axis, out, fill_value, keepdims]) 沿着给定的轴返回最大值。
+ma.min(obj[, axis, out, fill_value, keepdims]) 沿着给定的轴返回最小值。
+ma.ptp(obj[, axis, out, fill_value]) 沿着给定的维数返回(最大值-最小值)
+ma.MaskedArray.argmax([axis, fill_value, out]) 返回沿给定轴的最大值的索引数组。
+ma.MaskedArray.argmin([axis, fill_value, out]) 沿着给定的轴将索引数组返回到最小值。
+ma.MaskedArray.max([axis, out, fill_value, …]) 沿着给定的轴返回最大值。
+ma.MaskedArray.min([axis, out, fill_value, …]) 沿着给定的轴返回最小值。
+ma.MaskedArray.ptp([axis, out, fill_value]) 沿着给定的维数返回(最大值-最小值)。
+#分拣
+ma.argsort(a[, axis, kind, order, endwith, …]) 返回按指定轴对数组进行排序的索引的ndarray。
+ma.sort(a[, axis, kind, order, endwith, …]) 就地对数组进行排序。
+ma.MaskedArray.argsort([axis, kind, order, …]) 返回按指定轴对数组进行排序的索引的ndarray。
+ma.MaskedArray.sort([axis, kind, order, …]) 就地对数组进行排序。
+#代数
+ma.diag(v[, k]) 提取对角线或构造对角线数组。
+ma.dot(a, b[, strict, out]) 返回两个数组的点积。
+ma.identity(n[, dtype]) 返回标识数组。
+ma.inner(a, b) 两个数组的内积。
+ma.innerproduct(a, b) 两个数组的内积。
+ma.outer(a, b) 计算两个向量的外积。
+ma.outerproduct(a, b) 计算两个向量的外积。
+ma.trace(self[, offset, axis1, axis2, …]) 沿着数组的对角线返回和。
+ma.transpose(a[, axes]) 排列数组的大小。
+ma.MaskedArray.trace([offset, axis1, axis2, …]) 沿着数组的对角线返回和。
+ma.MaskedArray.transpose(*axes) 返回已移置轴的数组视图。
+#多项式拟合
+ma.vander(x[, n]) 生成Vandermonde矩阵。
+ma.polyfit(x, y, deg[, rcond, full, w, cov]) 最小二乘多项式拟合
+#裁剪和舍入
+ma.around 将数组四舍五入到给定的小数位数。
+ma.clip(a, a_min, a_max[, out]) 剪辑(限制)数组中的值。
+ma.round(a[, decimals, out]) 返回a的副本，将其四舍五入为“小数”位。
+ma.MaskedArray.clip([min, max, out]) 返回值限制为[min，max]的数组。
+ma.MaskedArray.round([decimals, out]) 返回每个元素四舍五入到给定的小数位数。
+#杂项
+ma.allequal(a, b[, fill_value]) 如果a和b的所有条目都相等，则返回True，使用Fill_VALUE作为真值，其中任一项或两者都被屏蔽。
+ma.allclose(a, b[, masked_equal, rtol, atol]) 如果两个数组在公差内按元素大小相等，则返回True。
+ma.apply_along_axis(func1d, axis, arr, …) 沿着给定的轴向一维切片应用函数.
+ma.arange([start,] stop[, step,][, dtype]) 在给定的间隔内返回均匀间隔的值。
+ma.choose(indices, choices[, out, mode]) 使用索引数组从一组选择中构造新数组。
+ma.ediff1d(arr[, to_end, to_begin]) 计算数组中连续元素之间的差异。
+ma.indices(dimensions[, dtype]) 返回一个表示网格索引的数组。
+ma.where(condition[, x, y]) 根据条件返回包含x或y元素的掩码数组
+数学函数
+#三角函数
+sin(x, /[, out, where, casting, order, …]) 逐个元素运算三角正弦函数。
+cos(x, /[, out, where, casting, order, …]) 逐个元素运算三角余弦函数。
+tan(x, /[, out, where, casting, order, …]) 逐个元素运算三角正切函数。
+arcsin(x, /[, out, where, casting, order, …]) 逐个元素运算三角反正弦函数。
+arccos(x, /[, out, where, casting, order, …]) 逐个元素运算三角反余弦函数。
+arctan(x, /[, out, where, casting, order, …]) 逐个元素运算三角反正切函数。
+hypot(x1, x2, /[, out, where, casting, …]) 给定直角三角形的“腿”，返回它的斜边。
+arctan2(x1, x2, /[, out, where, casting, …]) 元素弧切线x1/x2正确选择象限。
+degrees(x, /[, out, where, casting, order, …]) 将角度从弧度转换为度数。
+radians(x, /[, out, where, casting, order, …]) 将角度从度数转换为弧度。
+unwrap(p[, discont, axis]) 通过将值之间的差值更改为2*pi补码来展开。
+deg2rad(x, /[, out, where, casting, order, …]) 将角度从度数转换为弧度。
+rad2deg(x, /[, out, where, casting, order, …]) 将角度从弧度转换为度数。
+#双曲函数
+sinh(x, /[, out, where, casting, order, …]) 逐个元素运算双曲正弦函数。
+cosh(x, /[, out, where, casting, order, …]) 逐个元素运算双曲余弦函数。
+tanh(x, /[, out, where, casting, order, …]) 逐个元素运算双曲正切函数。
+arcsinh(x, /[, out, where, casting, order, …]) 逐个元素运算逆双曲正弦函数。
+arccosh(x, /[, out, where, casting, order, …]) 逐个元素运算逆双曲正弦函数。
+arctanh(x, /[, out, where, casting, order, …]) 逐个元素运算逆双曲正弦函数。
+#小数操作
+around(a[, decimals, out]) 按给定的小数位数均匀地四舍五入。
+round_(a[, decimals, out]) 将数组舍入到给定的小数位数。
+rint(x, /[, out, where, casting, order, …]) 将数组的元素舍入为最接近的整数。
+fix(x[, out]) 向零舍入到最接近的整数。
+floor(x, /[, out, where, casting, order, …]) 逐个元素返回输入的下限。
+ceil(x, /[, out, where, casting, order, …]) 逐个元素返回输入的上限。
+trunc(x, /[, out, where, casting, order, …]) 逐个元素返回输入的截断值。
+#求总和, 求乘积, 求差异
+prod(a[, axis, dtype, out, keepdims]) 返回给定轴上的数组元素的乘积。
+sum(a[, axis, dtype, out, keepdims]) 给定轴上的数组元素的总和。
+nanprod(a[, axis, dtype, out, keepdims]) 返回给定轴上的数组元素的乘积，将非数字（NaN）视为1。
+nansum(a[, axis, dtype, out, keepdims]) 返回给定轴上的数组元素的总和，将非数字（NaN）视为零。
+cumprod(a[, axis, dtype, out]) 返回给定轴上元素的累积乘积。
+cumsum(a[, axis, dtype, out]) 返回给定轴上元素的累积和。
+nancumprod(a[, axis, dtype, out]) 返回给定轴上的数组元素的累积乘积，将非数字（NaN）视为一个。
+nancumsum(a[, axis, dtype, out]) 返回给定轴上的数组元素的累积和，将非数字（NaN）视为零。
+diff(a[, n, axis]) 计算沿给定轴的第n个离散差。
+ediff1d(ary[, to_end, to_begin]) 数组的连续元素之间的差异。
+gradient(f, varargs, *kwargs) 返回N维数组的渐变。
+cross(a, b[, axisa, axisb, axisc, axis]) 返回两个（数组）向量的叉积。
+trapz(y[, x, dx, axis]) 沿给定的轴积分使用复合梯形规则运算。
+#指数和对数
+exp(x, /[, out, where, casting, order, …]) 计算输入数组中所有元素的指数。
+expm1(x, /[, out, where, casting, order, …]) 计算数组中所有元素的exp(X)-1。
+exp2(x, /[, out, where, casting, order, …]) 为输入数组中的所有p计算2**p。
+log(x, /[, out, where, casting, order, …]) 逐个元素计算自然对数。
+log10(x, /[, out, where, casting, order, …]) 逐个元素计算返回输入数组的以10为底的对数。
+log2(x, /[, out, where, casting, order, …]) 以-2为底的对数。
+log1p(x, /[, out, where, casting, order, …]) 逐个元素计算返回一个自然对数加上输入数组。
+logaddexp(x1, x2, /[, out, where, casting, …]) 输入的指数之和的对数。
+logaddexp2(x1, x2, /[, out, where, casting, …]) 以-2为基的输入的指数和的对数。
+#其他的特殊函数
+i0(x) 修正的第一类贝塞尔函数，0阶。
+sinc(x) 返回sinc函数。
+#浮点数操作
+signbit(x, /[, out, where, casting, order, …]) 返回元素为True设置signbit（小于零）。
+copysign(x1, x2, /[, out, where, casting, …]) 逐个元素将x1的符号改为x2的符号。
+frexp(x[, out1, out2], / [[, out, where, …]) 将x的元素分解成尾数和TWOS指数。
+ldexp(x1, x2, /[, out, where, casting, …]) 逐个元素返回x1*2*x2。
+nextafter(x1, x2, /[, out, where, casting, …]) 逐个元素返回x1后的下一个浮点值到x2。
+spacing(x, /[, out, where, casting, order, …]) 返回x与最近邻数之间的距离。
+#算术运算
+add(x1, x2, /[, out, where, casting, order, …]) 按元素添加参数。
+reciprocal(x, /[, out, where, casting, …]) 逐元素计算返回参数的倒数。
+positive(x, /[, out, where, casting, order, …]) 逐元素正数计算
+negative(x, /[, out, where, casting, order, …]) 逐元素负数计算
+multiply(x1, x2, /[, out, where, casting, …]) 逐元素参数相乘
+divide(x1, x2, /[, out, where, casting, …]) 逐元素方式返回输入的真正除法。
+power(x1, x2, /[, out, where, casting, …]) 逐元素将第一个数组元素从第二个数组提升到幂。
+subtract(x1, x2, /[, out, where, casting, …]) 逐元素参数相减。
+true_divide(x1, x2, /[, out, where, …]) 按元素返回输入的真实相除。
+floor_divide(x1, x2, /[, out, where, …]) 返回小于或等于输入除法的最大整数。
+float_power(x1, x2, /[, out, where, …]) 逐元素将第一个数组元素从第二个数组提升到幂。
+fmod(x1, x2, /[, out, where, casting, …]) 返回除法的元素余数。
+mod(x1, x2, /[, out, where, casting, order, …]) 返回除法元素的余数。
+modf(x[, out1, out2], / [[, out, where, …]) 以元素方式返回数组的分数和整数部分。
+remainder(x1, x2, /[, out, where, casting, …]) 返回除法元素的余数。
+divmod(x1, x2[, out1, out2], / [[, out, …]) 同时返回逐元素的商和余数。
+#Handling complex numbers
+angle(z[, deg]) 返回复杂参数的角度。
+real(val) 返回复杂参数的实部。
+imag(val) 返回复杂参数的虚部。
+conj(x, /[, out, where, casting, order, …]) 以元素方式返回复共轭。
+#杂项
+convolve(a, v[, mode]) 返回两个一维序列的离散线性卷积。
+clip(a, a_min, a_max[, out]) 剪辑（限制）数组中的值。
+sqrt(x, /[, out, where, casting, order, …]) 逐个元素返回数组的正平方根。
+cbrt(x, /[, out, where, casting, order, …]) 逐个元素返回数组的立方根。
+square(x, /[, out, where, casting, order, …]) 返回输入的元素方块。
+absolute(x, /[, out, where, casting, order, …]) 逐个元素地计算绝对值。
+fabs(x, /[, out, where, casting, order, …]) 逐个元素计算绝对值。
+sign(x, /[, out, where, casting, order, …]) 返回数字符号的元素指示。
+heaviside(x1, x2, /[, out, where, casting, …]) 计算Heaviside阶跃函数。
+maximum(x1, x2, /[, out, where, casting, …]) 取数组中最大的元素。
+minimum(x1, x2, /[, out, where, casting, …]) 取数组中最小的元素。
+fmax(x1, x2, /[, out, where, casting, …]) 取数组中最大的元素。
+fmin(x1, x2, /[, out, where, casting, …]) 取数组中最小的元素。
+nan_to_num(x[, copy]) 将nan替换为零，使用大的有限数替换inf。
+real_if_close(a[, tol]) 如果复杂输入返回真实数组，如果复杂零件接近于零。
+interp(x, xp, fp[, left, right, period]) 一维线性插值。
+矩阵库
+该模块包含numpy命名空间中的所有函数，以下替换函数返回matrices而不是ndarrays。
+
+也在numpy命名空间和返回矩阵中的函数
+
+mat(data[, dtype]) 将输入参数解释为矩阵。
+matrix(data[, dtype, copy]) 从类数组对象或数据字符串返回矩阵。
+asmatrix(data[, dtype]) 将输入参数解释为矩阵。
+bmat(obj[, ldict, gdict]) 从字符串，嵌套序列或数组构建矩阵对象。
+matlab替代函数
+
+empty(shape[, dtype, order]) 返回给定形状和类型的新矩阵，而不初始化条目。
+zeros(shape[, dtype, order]) 返回给定形状和类型的矩阵，用零填充。
+ones(shape[, dtype, order]) 返回给定形状和类型的矩阵，用一填充。
+eye(n[, M, k, dtype, order]) 返回一个矩阵，其中对角线为1，零点为零。
+identity(n[, dtype]) 返回给定大小的方形单位矩阵。
+repmat(a, m, n) 重复0-D到2-D阵列或矩阵MxN次。
+rand(*args) 返回给定形状的随机值矩阵。
+randn(*args) 返回包含“标准正态”分布数据的随机矩阵。
+填充数组
+pad(array, pad_width, mode, **kwargs) 填充数组。
+多项式
+NumPy中的多项式可以使用NumPy 1.4中引入的numpy.polynomial包的使用方便类来创建，操作甚至拟合。
+
+在NumPy 1.4之前，numpy.poly1d是首选类，它仍然可用以保持向后兼容性。 但是，较新的Polynomial包比numpy.poly1d更完整，并且它的便利类在numpy环境中表现得更好。 因此，建议使用多项式进行新的编码。
+
+#过渡通知
+Polynomial包中的各种例程都处理系列，其系数从零度向上，这是Poly1d约定的逆序。 记住这一点的简单方法是索引对应于度，即，coef[i]是度i的项的系数。
+
+统计学
+#顺序统计
+amin(a[, axis, out, keepdims]) 返回数组的最小值或沿轴的最小值。
+amax(a[, axis, out, keepdims]) 返回数组的最大值或沿轴的最大值。
+nanmin(a[, axis, out, keepdims]) 返回数组的最小值或沿轴的最小值，忽略任何NAS。
+nanmax(a[, axis, out, keepdims]) 返回数组的最大值或沿轴方向的最大值，忽略任何NAS。
+ptp(a[, axis, out]) 沿轴的值的范围(最大值-最小值)。
+percentile(a, q[, axis, out, …]) 计算数据沿指定轴的第qth百分位数。
+nanpercentile(a, q[, axis, out, …]) 在忽略NaN值的情况下，沿着指定的轴计算数据的第qth百分位数。
+#平均数和差异
+median(a[, axis, out, overwrite_input, keepdims]) 沿指定轴计算中值。
+average(a[, axis, weights, returned]) 计算沿指定轴的加权平均。
+mean(a[, axis, dtype, out, keepdims]) 沿指定的轴计算算术平均值。
+std(a[, axis, dtype, out, ddof, keepdims]) 计算沿指定轴的标准偏差。
+var(a[, axis, dtype, out, ddof, keepdims]) 计算沿指定轴的方差。
+nanmedian(a[, axis, out, overwrite_input, …]) 在忽略NAS的情况下，沿指定的轴计算中值。
+nanmean(a[, axis, dtype, out, keepdims]) 计算沿指定轴的算术平均值，忽略NAS。
+nanstd(a[, axis, dtype, out, ddof, keepdims]) 计算指定轴上的标准偏差，而忽略NAS。
+nanvar(a[, axis, dtype, out, ddof, keepdims]) 计算指定轴上的方差，同时忽略NAS。
+#关联
+corrcoef(x[, y, rowvar, bias, ddof]) 返回Pearson乘积矩相关系数。
+correlate(a, v[, mode]) 返回两个一维序列的交叉关系。
+cov(m[, y, rowvar, bias, ddof, fweights, …]) 估计协方差矩阵，给定数据和权重。
+#直方图📊
+histogram(a[, bins, range, normed, weights, …]) 计算一组数据的直方图。
+histogram2d(x, y[, bins, range, normed, weights]) 计算两个数据样本的二维直方图。
+histogramdd(sample[, bins, range, normed, …]) 计算某些数据的多维直方图。
+bincount(x[, weights, minlength]) 计算非负INT数组中每个值出现的次数。
+digitize(x, bins[, right]) 返回输入数组中每个值所属的bins的索引。
+测试相关API
+公共测试库为所有的numpy测试脚本提供测试支持。
+
+这个单独的模块应该在一个位置提供numpy测试的所有常用功能，这样测试脚本就可以只导入它并立即工作。
+
+#断言
+assert_almost_equal(actual, desired[, …]) 如果两个项目不等于所需精度，则引发AssertionError。
+assert_approx_equal(actual, desired[, …]) 如果两个项目不等于有效数字，则引发AssertionError。
+assert_array_almost_equal(x, y[, decimal, …]) 如果两个对象不等于所需的精度，则引发AssertionError。
+assert_allclose(actual, desired[, rtol, …]) 如果两个对象不等于所需的容差，则引发AssertionError。
+assert_array_almost_equal_nulp(x, y[, nulp]) 比较两个数组的间距。
+assert_array_max_ulp(a, b[, maxulp, dtype]) 检查所有数组项是否在“最后的位置”中最多为N个单位。
+assert_array_equal(x, y[, err_msg, verbose]) 如果两个数组类对象不相等，则引发AssertionError。
+assert_array_less(x, y[, err_msg, verbose]) 如果两个类数组对象不是由小于排序的，则引发AssertionError。
+assert_equal(actual, desired[, err_msg, verbose]) 如果两个对象不相等，则引发AssertionError。
+assert_raises(exception_class, callable, …) 失败，除非调用参数args和关键字参数kwargs时调用able_class抛出类的异常。
+assert_raises_regex(exception_class, …) 失败，除非在调用参数args和关键字参数kwargs时，调用able抛出与Expect_regexp匹配的异常类EXCEPTION_CLASE和WITH消息。
+assert_warns(warning_class, args, *kwargs) 除非给定的可调用对象抛出指定的警告，否则将失败。
+assert_string_equal(actual, desired) 测试两个字符串是否相等。
+#装饰方法
+decorators.deprecated([conditional]) 运行测试套件时过滤弃用警告。
+decorators.knownfailureif(fail_condition[, msg]) 如果给定条件为真，则使函数引发KnownFailureException异常。
+decorators.setastest([tf]) 发出嗅探信号返回此函数是否是测试函数。
+decorators.skipif(skip_condition[, msg]) 如果给定条件为真，则使函数引发SkipTest异常。
+decorators.slow(t) 将测试标为'slow'。
+decorate_methods(cls, decorator[, testmatch]) 将装饰器应用于与正则表达式匹配的类中的所有方法。
+#运行测试
+Tester numpy.testing.nose_tools.nosetester.NoseTester别名
+run_module_suite([file_to_run, argv]) 运行测试模块。
+rundocs([filename, raise_on_error]) 在指定的文件中找到并运行doctests。
+suppress_warnings([forwarding_rule]) 上下文管理器和装饰器执行的操作与warnings.catch_warns大致相同。
+二进制操作
+#单元位运算
+bitwise_and(x1, x2, /[, out, where, …]) 计算位和两个数组的元素。
+bitwise_or(x1, x2, /[, out, where, casting, …]) 计算两个数组元素的位或。
+bitwise_xor(x1, x2, /[, out, where, …]) 计算两个数组元素的位异或。
+invert(x, /[, out, where, casting, order, …]) 按位计算求逆，或按位求逆，按元素计算。
+left_shift(x1, x2, /[, out, where, casting, …]) 将整数的位向左移。
+right_shift(x1, x2, /[, out, where, …]) 将整数的位向右移。
+#Bit位打包
+packbits(myarray[, axis]) 将二进制值数组的元素打包到uint8数组中的位中。
+unpackbits(myarray[, axis]) 将uint8数组的元素解包为二进制值输出数组。
+#输出格式
+binary_repr(num[, width]) 将输入数字的二进制表示形式返回为字符串。
+NumPy特别的帮助功能
+#寻求帮助
+lookfor(what[, module, import_modules, …]) 在docstrings上进行关键字搜索。
+#阅读帮助
+info([object, maxwidth, output, toplevel]) 获取函数，类或模块的帮助信息。
+source(object[, output]) 将文件打印或写入NumPy对象的源代码。
+窗口函数
+#各种窗口函数
+bartlett(M) 返回Bartlett窗口。
+blackman(M) 返回Blackman窗口。
+hamming(M) 返回Hamming窗口。
+hanning(M) 返回Hanning窗口。
+kaiser(M, beta) 返回Kaiser窗口。
+可选的Scipy加速支持
+可以通过Scipy加速的函数的别名。
+
+可以构建Scipy以使用加速或其他改进的库来进行FFT，线性代数和特殊函数。 此模块允许开发人员在scipy可用时透明地支持这些加速功能，但仍支持仅安装了NumPy的用户
+
+#线性代数
+cholesky(a) Cholesky分解。
+det(a) 计算数组的行列式。
+eig(a) 计算正方形阵列的特征值和右特征向量。
+eigh(a[, UPLO]) 返回Hermitian或对称矩阵的特征值和特征向量。
+eigvals(a) 计算一般矩阵的特征值。
+eigvalsh(a[, UPLO]) 计算Hermitian或实对称矩阵的特征值。
+inv(a) 计算矩阵的（乘法）逆。
+lstsq(a, b[, rcond]) 将最小二乘解返回到线性矩阵方程。
+norm(x[, ord, axis, keepdims]) 矩阵或矢量规范。
+pinv(a[, rcond]) 计算矩阵的（Moore-Penrose）伪逆。
+solve(a, b) 求解线性矩阵方程或线性标量方程组。
+svd(a[, full_matrices, compute_uv]) 奇异值分解。
+#FFT
+fft(a[, n, axis, norm]) 计算一维离散傅立叶变换。
+fft2(a[, s, axes, norm]) 计算二维离散傅立叶变换。
+fftn(a[, s, axes, norm]) 计算N维离散傅立叶变换。
+ifft(a[, n, axis, norm]) 计算一维离散傅里叶逆变换。
+ifft2(a[, s, axes, norm]) 计算二维逆离散傅立叶变换。
+ifftn(a[, s, axes, norm]) 计算N维逆离散傅立叶变换。
+#Other
+i0(x) 修改了第一类贝塞尔函数，阶数为0。
+C-Types外部功能接口
+numpy.ctypeslib.as_array (obj, shape=None) source
+从ctypes数组或ctypes POINTER创建一个numpy数组。 numpy数组与ctypes对象共享内存。
+如果从ctypes POINTER转换，则必须给出size参数。 如果从ctypes数组转换，则忽略size参数
+
+numpy.ctypeslib.as_ctypes(obj) source
+从numpy数组创建并返回ctypes对象。 实际上接受了暴露array_interface的任何东西。
+
+numpy.ctypeslib.ctypes_load_library (args, *kwds) source
+不推荐使用ctypes_load_library，而是使用load_library！
+
+可以使用 lib = ctypes.cdll [<full_path_name>]加载库
+
+但是存在跨平台的考虑因素，例如库文件扩展，以及Windows将只加载它找到的具有该名称的第一个库。 为方便起见，NumPy提供load_library函数。
+
+Parameters:
+
+libname : str
+库的名称，可以将“lib”作为前缀，但不带扩展名。
+loader_path : str
+提供这个库的路径
+Returns:
+
+ctypes.cdll[libpath] : library object
+一个ctypes库对象
+Raises:
+
+OSError
+如果没有具有预期扩展名的库，或者库有缺陷且无法加载。
+numpy.ctypeslib.load_library(libname, loader_path) source
+可以使用>>> lib = ctypes.cdll [<full_path_name>]加载库
+
+但是存在跨平台的考虑因素，例如库文件扩展，以及Windows将只加载它找到的具有该名称的第一个库。 为方便起见，NumPy提供load_library函数。
+
+Parameters:
+
+libname : str
+库的名称，可以将“lib”作为前缀，但不带扩展名。
+loader_path : str
+提供这个库的路径
+Returns:
+
+ctypes.cdll[libpath] : library object
+一个ctypes库对象
+Raises:
+
+OSError
+如果没有具有预期扩展名的库，或者库有缺陷且无法加载。
+numpy.ctypeslib.ndpointer (dtype=None, ndim=None, shape=None, flags=None) source
+数组检查restype / argtypes。
+
+ndpointer实例用于描述restypes和argtypes规范中的ndarray。 这种方法比使用“POINTER（c_double）”更灵活，因为可以指定几个限制，这些限制在调用ctypes函数时得到验证。 这些包括数据类型，维度数量，形状和标志。 如果给定的数组不满足指定的限制，则引发“TypeError”。
+
+Parameters:
+
+dtype : 数据类型，可选
+数组数据类型
+ndim : int, 可选
+数组维数。
+shape : 整数元组，可选
+阵列形状。
+flags : str的str或tuple
+数组标志; 可能是以下一种或多种：
+C_CONTIGUOUS / C / CONTIGUOUS
+F_CONTIGUOUS / F / FORTRAN
+OWNDATA / O
+WRITEABLE / W
+ALIGNED / A
+WRITEBACKIFCOPY / X
+UPDATEIFCOPY / U
+Returns:
+
+klass : ndpointer类型对象
+一个类型对象，它是一个包含dtype，ndim，shape和flags信息的_ndtpr实例。
+Raises:
+
+TypeError
+如果给定的数组不满足指定的限制。
+杂项API
+#Buffer 对象
+getbuffer （获取buffer）
+newbuffer （新建buffer）
+#性能调优
+setbufsize(size) 设置ufunc中使用的缓冲区的大小。
+getbufsize() 返回ufunc中使用的缓冲区的大小。
+#内存范围
+shares_memory(a, b[, max_work]) 确定两个数组是否共享内存
+may_share_memory(a, b[, max_work]) 确定两个数组是否可以共享内存
+#数组混合器
+lib.mixins.NDArrayOperatorsMixin Mixin使用 array_ufunc 定义所有运算符特殊方法。
+#NumPy版本比较
+lib.NumpyVersion(vstring) 解析并比较numpy版本字符串。
