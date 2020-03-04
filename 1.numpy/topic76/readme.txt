@@ -1,0 +1,2 @@
+描述：Consider a one-dimensional array Z, build a two-dimensional array whose first row is (Z\\[0\\],Z\\[1\\],Z\\[2\\]) and each subsequent row is  shifted by 1 (last row should be (Z\\[-3\\],Z\\[-2\\],Z\\[-1\\]) 
+考虑一维数组Z，构建一个二维数组，其第一行为(Z[0],Z[1],Z[2])，每个后续行移1 行 (最后一行应该是Z[-3],Z[-2],Z[-1]) 
