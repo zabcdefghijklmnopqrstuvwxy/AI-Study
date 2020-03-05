@@ -1,0 +1,2 @@
+描述：Consider 2 sets of points P0,P1 describing lines (2d) and a set of points P, how to compute distance from each point j (P\\[j\\]) to each line i (P0\\[i\\],P1\\[i\\])
+考虑2组点P0，P1描述线（2d）和一组点P，如何计算从每个点j (P[j])到每条线的距离i (P0[i],P1[i])
