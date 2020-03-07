@@ -1,0 +1,2 @@
+描述：Consider an arbitrary array, write a function that extract a subpart with a fixed shape and centered on a given element (pad with a `fill` value when necessary)
+考虑2组点P0，P1描述线（2d）和一组点P，如何计算从每个点j (P[j])到每条线的距离i (P0[i],P1[i])
