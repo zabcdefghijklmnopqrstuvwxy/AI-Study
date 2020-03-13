@@ -250,3 +250,40 @@ use_unsigned : boolean, default False
 memory_map : boolean, default False
 
 如果使用的文件在内存内，那么直接map文件使用。使用这种方式可以避免文件再次进行IO操作。
+
+
+
+
+Head 与 Tail
+head() 与 tail() 用于快速预览 Series 与 DataFrame，默认显示 5 条数据，也可以指定显示数据的数量。
+使用pandas输出data frame 内容时常常会遇到显示不全（部分内容省略）或者在不该换行的地方换行，给我们的观察造成麻烦。
+可以通过set_option来配置pandas的属性，API官网在这点击跳转
+这里介绍最常用的四个属性，基本上可以满足我们日常的需要。
+
+display.max_rows 显示的最大行数（避免只显示部分行数据）
+display.max_columns 显示的最大列数（避免列显示不全）
+display.max_colwidth 每一列最大的宽度（避免属性值或列名显示不全）
+display.width 每一行的宽度（避免换行）
+使用如下：
+
+pd.set_option('display.max_rows', 100)
+pd.set_option('display.max_columns', 1000)
+pd.set_option("display.max_colwidth",1000)
+pd.set_option('display.width',1000)
+
+或者写在一行
+
+pd.set_option('display.max_rows', 100,'display.max_columns', 1000,"display.max_colwidth",1000,'display.width',1000)
+
+
+Pandas 可以通过多个属性访问元数据：
+shape:
+输出对象的轴维度，与 ndarray 一致
+轴标签
+Series: Index (仅有此轴)
+DataFrame: Index (行) 与列
+
+
+
+
+
