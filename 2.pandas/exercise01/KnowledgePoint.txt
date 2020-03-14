@@ -284,6 +284,39 @@ Series: Index (仅有此轴)
 DataFrame: Index (行) 与列
 
 
+显示索引与列名：
+df.columns  显示列名
+df.index    显示行名
+
+sort_values()函数用途
+pandas中的sort_values()函数原理类似于SQL中的order by，可以将数据集依照某个字段中的数据进行排序，该函数即可根据指定列数据也可根据指定行的数据排序。
+
+sort_values()函数的具体参数
+
+用法：
+DataFrame.sort_values(by=‘##’,axis=0,ascending=True, inplace=False, na_position=‘last’)
+
+参数说明
+
+参数	说明
+by	指定列名(axis=0或’index’)或索引值(axis=1或’columns’)
+axis	若axis=0或’index’，则按照指定列中数据大小排序；若axis=1或’columns’，则按照指定索引中数据大小排序，默认axis=0
+ascending	是否按指定列的数组升序排列，默认为True，即升序排列
+inplace	是否用排序后的数据集替换原来的数据，默认为False，即不替换
+na_position	{‘first’,‘last’}，设定缺失值的显示位置
 
 
 
+在pandas里面常用value_counts确认数据出现的频率。
+1. Series 情况下：
+pandas 的 value_counts() 函数可以对Series里面的每个值进行计数并且排序。
+如果想升序排列，设置参数 ascending = True：
+如果想得出计数占比，可以加参数 normalize=True：
+注：空值默认剔除掉的。value_counts()返回的结果是一个Series数组，可以跟别的数组进行计算。
+
+
+不管是为 Pandas 对象应用自定义函数，还是应用第三方函数，都离不开以下三种方法。用哪种方法取决于操作的对象是 DataFrame，还是 Series ；是行、列，还是元素。
+表级函数应用：pipe()
+行列级函数应用： apply()
+聚合 API： agg() 与 transform()
+元素级函数应用：applymap()
