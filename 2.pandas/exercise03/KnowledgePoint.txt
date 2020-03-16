@@ -1,0 +1,28 @@
+下表为常用函数汇总表。每个函数都支持 level 参数，仅在数据对象为结构化 Index 时使用。
+
+函数	描述
+count	统计非空值数量
+sum	汇总值
+mean	平均值
+mad	平均绝对偏差
+median	算数中位数
+min	最小值
+max	最大值
+mode	众数
+abs	绝对值
+prod	乘积
+std	贝塞尔校正的样本标准偏差
+var	无偏方差
+sem	平均值的标准误差
+skew	样本偏度 (第三阶)
+kurt	样本峰度 (第四阶)
+quantile	样本分位数 (不同 % 的值)
+cumsum	累加
+cumprod	累乘
+cummax	累积最大值
+cummin	累积最小值
+注意：NumPy 的 mean、std、sum 等方法默认不统计 Series 里的空值。
+
+
+指定为哪些列应用哪些聚合函数时，需要把包含列名与标量（或标量列表）的字典传递给 DataFrame.agg。
+注意：这里输出结果的顺序不是固定的，要想让输出顺序与输入顺序一致，请使用 OrderedDict。
