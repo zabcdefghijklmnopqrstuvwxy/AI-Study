@@ -1,0 +1,63 @@
+pandas中的绘图函数
+Series和DataFrame都有一个用于生成各类图表的plot方法。默认情况下，它们所生成的是线形图
+
+线形图
+s = Series(data=np.random.randint(0,10, size=10))
+s.plot()
+柱状图
+Series柱状图示例,kind = 'bar'/'barh'
+
+s.plot(kind='bar')
+
+s.plot(kind='barh')
+
+ 
+
+DataFrame柱状图示例
+
+df.plot(kind='bar')
+
+直方图
+rondom生成随机数百分比直方图，调用hist方法
+
+柱高表示数据的频数，柱宽表示各组数据的组距
+
+参数bins可以设置直方图方柱的个数上限，越大柱宽越小，数据分组越细致
+
+设置normed参数为True，可以把频数转换为概率
+
+s.plot(kind='hist')
+
+kde图：核密度估计，用于弥补直方图由于参数bins设置的不合理导致的精度缺失问题
+
+s.plot(kind='hist',bins=10,density=True) s.plot(kind='kde')
+
+绘制一个由两个不同的标准正态分布组成的的双峰分布
+n1 = np.random.normal(loc=10, scale=5, size=1000)
+n2 = np.random.normal(loc=50, scale=7, size=1000)
+n = np.hstack((n1,n2))
+s = Series(data=n)
+s.plot(kind='hist',bins=100,density=True)
+s.plot(kind='kde')
+ 
+
+散布图
+散布图 散布图是观察两个一维数据数列之间的关系的有效方法,DataFrame对象可用
+
+使用方法： 设置kind = 'scatter'，给明标签columns
+
+df.plot(x='A', y='B',kind='scatter')
+
+散布图矩阵，当有多个点时，两两点的关系
+
+使用函数：pd.plotting.scatter_matrix(),
+
+参数diagnol：设置对角线的图像类型
+
+pd.plotting.scatter_matrix(df)
+​
+pd.plotting.scatter_matrix(df, figsize=(16,16), diagonal='kde')
+ 
+
+饼图
+df.plot(kind='pie', autopct='%.2f%%')
