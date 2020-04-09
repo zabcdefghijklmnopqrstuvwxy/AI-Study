@@ -1,0 +1,122 @@
+SciPy中的常量包提供了很多科学领域中的常量，例如：光速。
+
+SciPy 常量包
+要使用常量，需要先导入常量包（scipy.constants）。
+
+示例
+
+从scipy.constants中导入pi值：
+
+#导入pi常量
+from scipy.constants import pi
+
+print("sciPy - pi = %.16f"%pi)
+输出：
+
+sciPy - pi = 3.1415926535897931
+常数表
+下面的表格列出了各种常量及其描述。
+
+数学常量
+序号	常量	描述
+1	pi	pi
+2	golden	黄金比例
+物理常数
+
+下表列出了常用的物理常数。
+
+序号	常量及其描述
+1	
+c
+
+真空中的光速
+
+2	
+speed_of_light
+
+真空中的光速
+
+3	
+h
+
+普朗克常数
+
+4	
+Planck
+
+普朗克常量
+
+5	
+G
+
+牛顿的引力常数
+
+6	
+e
+
+基本电荷
+
+7	
+R
+
+摩尔气体常数
+
+8	
+Avogadro
+
+阿伏伽德罗常数
+
+9	
+k
+
+玻耳兹曼常量
+
+10	
+electron_mass(OR) m_e
+
+电子质量
+
+11	
+proton_mass (OR) m_p
+
+质子质量
+
+12	
+neutron_mass(OR)m_n
+
+中子质量
+
+单位
+下表列出了常用的国际标准单位。
+
+序号	单位	值
+1	milli	0.001
+2	micro	1e-06
+3	kilo	1000
+这些单位范围从yotta, zetta, exa, peta, tera…kilo, hector，…nano, pico，…到zepto。
+
+其他重要的常量
+下表列出了SciPy中使用的其他重要常量。
+
+序号	单位	值
+1	gram	1克
+2	atomic mass	原子质量常数
+3	degree	1弧度
+4	minute	60秒
+5	day	一天几秒
+6	inch	一英寸表示为多少米
+7	micron	一微米表示为多少米
+8	light_year	一光年表示为多少米
+9	atm	帕斯卡为单位表示的标准大气压
+10	acre	一英亩表示为多少平方米
+11	liter	一升以立方米为单位表示
+12	gallon	一加仑以立方米为单位表示
+13	kmh	千米每小以米每秒为单位表示
+14	degree_Fahrenheit	凯尔文氏以华氏度表示
+15	eV	1电子伏以焦耳表示
+16	hp	马力以瓦特表示
+17	dyn	达因以牛顿表示
+18	lambda2nu	将波长转换为光学频率
+常量比较多，不可能都记住，可以使用scipy.constants.find()函数查找常量。
+
+scipy.constants.find()函数返回physical_constants常量字典的键列表，如果关键字不匹配，则不返回任何内容。获得键列表后，可以使用physical_constants['key']获取常量。
